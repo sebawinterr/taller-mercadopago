@@ -34,8 +34,8 @@ module.exports = {
         res.status(200).end('Ok');
     },
     comprar: (req, res) => {
-        const url = 'http://localhost:3000/callback?status='; //Hay que cambiar esta URL para la            certificacion con Heroku
-        const host = 'http://localhost:3000/';
+        const url = 'https://mercadopago-dh.herokuapp.com/callback?status='; //Hay que cambiar esta URL para la            certificacion con Heroku
+        const host = 'https://mercadopago-dh.herokuapp.com';
 
 
         let preference = {
