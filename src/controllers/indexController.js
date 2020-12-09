@@ -34,8 +34,8 @@ module.exports = {
         return res.status(404).end();
     },
     notifications: (req, res) => {
-        console.log(req.body);
-        res.status(200).end('Ok');
+        console.log('notifications',req.body);
+        res.status(200).end(req.body);
     },
     comprar: (req, res) => {
         const url = 'https://mercadopago-dh.herokuapp.com/callback?status='; //Hay que cambiar esta URL para la certificacion con Heroku
