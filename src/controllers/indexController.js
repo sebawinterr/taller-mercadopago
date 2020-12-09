@@ -48,7 +48,7 @@ module.exports = {
                 failure: url + 'failure'
             },
             auto_return: 'approved',
-            notification_url: host + 'notifications',
+            notification_url: host + '/notifications',
             payer: {
                 name: 'Lalo',
                 surname: 'Landa',
