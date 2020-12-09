@@ -16,7 +16,11 @@ module.exports = {
         console.log(req.query);
 
         if(req.query.status.includes('success')) {
-            return res.render('success');
+            return res.render('success', {
+                payment_type: req.query.payment_type,
+                external_reference: req.query.external_reference,
+                collection_id: req.query.collection_id
+            })
         }
 
         if(req.query.status.includes('pending')) {
@@ -34,9 +38,8 @@ module.exports = {
         res.status(200).end('Ok');
     },
     comprar: (req, res) => {
-        const url = 'https://mercadopago-dh.herokuapp.com/callback?status='; //Hay que cambiar esta URL para la            certificacion con Heroku
+        const url = 'https://mercadopago-dh.herokuapp.com/callback?status='; //Hay que cambiar esta URL para la certificacion con Heroku
         const host = 'https://mercadopago-dh.herokuapp.com';
-
 
         let preference = {
             back_urls: {
@@ -47,40 +50,40 @@ module.exports = {
             auto_return: 'approved',
             notification_url: host + 'notifications',
             payer: {
-                name: 'Ryan',
-                surname: 'Dahl',
+                name: 'Lalo',
+                surname: 'Landa',
                 email: 'test_user_63274575@testuser.com',
                 phone:{
                     area_code: '11',
-                    number: 55556666
+                    number: 22223333
                 },
                 address: {
-                    zip_code: '1234',
-                    street_name: 'Monroe',
-                    street_number: 860
+                    zip_code: '1111',
+                    street_name: 'False',
+                    street_number: 123
                 }
             },
             payment_methods: {
                 excluded_payment_methods: [     // tarjetas excluidas
-                    {id: 'visa'}
+                    {id: 'amex'}
                 ],
                 excluded_payment_types: [   // medios de pago excluidos
                     {id: 'atm'}
                 ],
-                installments: 12 // Cantidad maxima de cuotas
+                installments: 6 // Cantidad maxima de cuotas
                 
             },
             items: [
                 {
-                    id: '1234',         // tiene que decir 1234
-                    title: 'Titulo del producto',
-                    description: 'Dispositivo móvil de Tienda e-commerce', // Tiene que decir esto revisar el pdf
-                    picture_url: 'http://localhost:3000/images/products/disruptor.jpg',
+                    id: '1234',
+                    title: 'Nike Air Force',
+                    description: 'Dispositivo móvil de Tienda e-commerce',
+                    picture_url: 'http://localhost:3000/images/products/force.jpg',
                     quantity: 1,
-                    unit_price: 999
+                    unit_price: 13200
                 }
             ],
-            external_reference: 'wintersebast@gmail.com'    // email para validar la certificacion
+            external_reference: 'wintersebast@gmail.com'
         }
 
         mercadopago.preferences.create(preference).then(function(response){
